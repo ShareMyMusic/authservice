@@ -1,0 +1,23 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - config/.env
+    restart: always
+    ports:
+      - 8080:8080
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    env_file:
+      - config/.env
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
